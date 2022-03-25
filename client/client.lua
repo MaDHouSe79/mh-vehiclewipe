@@ -41,7 +41,7 @@ RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
         Wait(300)
     end
     QBCore.Functions.Notify(Lang:t('info.clear_message1', {count = count}), "success", 2000)
-    QBCore.Functions.Notify(Lang:t('info.clear_message2', minutes = Config.WipeTime), "success", 2000)
+    QBCore.Functions.Notify(Lang:t('info.clear_message2', minutes = Config.WipeTime}), "success", 2000)
 end)
 
 
