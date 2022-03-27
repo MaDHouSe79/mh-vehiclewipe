@@ -4,6 +4,10 @@
 
 local QBCore = exports['qb-core']:GetCoreObject()
 
+QBCore.Commands.Add("wipeall", "Wipe vehicles", {}, false, function(source)
+    Wipe()
+end, "admin")
+
 -- if you use qb-parking you can use this to ignore parked vehicles
 QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
     if Config.UseParking then
@@ -18,6 +22,12 @@ QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", functio
         end)
     else
         cb(false)
+    end
+end)
+
+AddEventHandler('onResourceStart', function(resource)
+    if resource == GetCurrentResourceName() then
+        Wipe()
     end
 end)
 
