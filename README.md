@@ -13,6 +13,8 @@
 - Start your server.
 - is wil run automatically every 30min for now.
 
+## Admin Command
+- typ `/wipeall` to start a server wipe.
 
 ## Config
 ```lua
