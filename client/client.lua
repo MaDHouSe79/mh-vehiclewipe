@@ -13,11 +13,12 @@ local function Delete(vehicle)
     end
 end
 
-local function isPlateIgnoredForWipe(p)
+local function isPlateIgnoredForWipe(plate)
+    local state = false
     for _, v in ipairs(Config.IgnorePlates) do
-        if v == p then return true end
+        if v == plate then state = true end
     end
-    return false
+    return state
 end
 
 RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
@@ -28,11 +29,12 @@ RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
     Citizen.Wait(Config.WaitTimer)                                                                         --- Time before the cleanup is done 30 000 = 30 seconds
     for vehicle in EnumerateVehicles() do
         local vehicleProps = QBCore.Functions.GetVehicleProperties(vehicle)
+        Wait(10)
         if (not IsPedAPlayer(GetPedInVehicleSeat(vehicle, -1))) then
-            if isPlateIgnoredForWipe(vehicleProps.plate) then return end
-            Wait(100)
             QBCore.Functions.TriggerCallback("qb-vehiclewipe:server:isVehicleParked", function(parked)
                 if parked then return end
+                local ignorePlate = isPlateIgnoredForWipe(vehicleProps.plate) 
+                if ignorePlate then return end
                 Delete(vehicle)
                 count = count + 1
                 Wait(300)
@@ -43,5 +45,3 @@ RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
     QBCore.Functions.Notify(Lang:t('info.clear_message1', {count = count}), "success", 2000)
     QBCore.Functions.Notify(Lang:t('info.clear_message2', {minutes = Config.WipeTime}), "success", 2000)
 end)
-
-
