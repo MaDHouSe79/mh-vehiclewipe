@@ -22,11 +22,11 @@ local function isPlateIgnoredForWipe(plate)
 end
 
 RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
-    QBCore.Functions.Notify(Lang:t('info.wipe_message1'), "primary", Config.WaitTimer)
-    QBCore.Functions.Notify(Lang:t('info.wipe_message2', {seconds = Config.WaitTimer}), "primary", Config.WaitTimer)
+    QBCore.Functions.Notify(Lang:t('info.wipe_message1'), "primary", 60000)
+    QBCore.Functions.Notify(Lang:t('info.wipe_message2', {seconds = 1}), "primary", 60000)
     local count = 0
     local ignore = 0
-    Citizen.Wait(Config.WaitTimer)                                                                         --- Time before the cleanup is done 30 000 = 30 seconds
+    Citizen.Wait(60000)                                                                         --- Time before the cleanup is done 30 000 = 30 seconds
     for vehicle in EnumerateVehicles() do
         local vehicleProps = QBCore.Functions.GetVehicleProperties(vehicle)
         Wait(10)
@@ -43,5 +43,5 @@ RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
         Wait(300)
     end
     QBCore.Functions.Notify(Lang:t('info.clear_message1', {count = count}), "success", 2000)
-    QBCore.Functions.Notify(Lang:t('info.clear_message2', {minutes = Config.WipeTime}), "success", 2000)
+    QBCore.Functions.Notify(Lang:t('info.clear_message2', {minutes = 30}), "success", 2000)
 end)
