@@ -21,4 +21,3 @@ client_scripts {
     'client/client.lua',
     'client/entityiter.lua'
 }
-
