@@ -25,16 +25,9 @@ QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", functio
     end
 end)
 
-AddEventHandler('onResourceStart', function(resource)
-    if resource == GetCurrentResourceName() then
-        Wipe()
-    end
-end)
-
 function Wipe()
     TriggerClientEvent("qb-vehiclewipe:client:wipe", -1)
-    SetTimeout(Config.WipeTime * (60 * 1000), Wipe)
+    SetTimeout(30 * (60 * 1000), Wipe)
 end
-
 -- dont remove this below, or the Auto wipe will not work.
 Wipe()
