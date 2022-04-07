@@ -11,7 +11,7 @@ end, "admin")
 -- if you use qb-parking you can use this to ignore parked vehicles
 QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
     if Config.UseParking then
-        MySQL.Async.fetchAll("SELECT * FROM player_parking WHERE plate = @plate", {
+        MySQL.Async.fetchAll("SELECT * FROM player_parking_vehicles WHERE plate = @plate", {
             ['@plate'] = plate
         }, function(rs)
             if type(rs) == 'table' and #rs > 0 then
