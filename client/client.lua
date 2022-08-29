@@ -21,7 +21,7 @@ local function isPlateIgnoredForWipe(plate)
     return state
 end
 
-RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
+RegisterNetEvent("mh-vehiclewipe:client:wipe", function()
     QBCore.Functions.Notify(Lang:t('info.wipe_message1'), "primary", 60000)
     QBCore.Functions.Notify(Lang:t('info.wipe_message2', {seconds = 1}), "primary", 60000)
     local count = 0
@@ -31,7 +31,7 @@ RegisterNetEvent("qb-vehiclewipe:client:wipe", function()
         local vehicleProps = QBCore.Functions.GetVehicleProperties(vehicle)
         Wait(10)
         if (not IsPedAPlayer(GetPedInVehicleSeat(vehicle, -1))) then
-            QBCore.Functions.TriggerCallback("qb-vehiclewipe:server:isVehicleParked", function(parked)
+            QBCore.Functions.TriggerCallback("mh-vehiclewipe:server:isVehicleParked", function(parked)
                 if parked then return end
                 local ignorePlate = isPlateIgnoredForWipe(vehicleProps.plate) 
                 if ignorePlate then return end
