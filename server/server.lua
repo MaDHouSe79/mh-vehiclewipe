@@ -9,7 +9,7 @@ QBCore.Commands.Add("wipeall", "Wipe vehicles", {}, false, function(source)
 end, "admin")
 
 -- if you use qb-parking you can use this to ignore parked vehicles
-QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
+QBCore.Functions.CreateCallback("mh-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
     if Config.UseParking then
         MySQL.Async.fetchAll("SELECT * FROM player_parking_vehicles WHERE plate = @plate", {
             ['@plate'] = plate
@@ -26,7 +26,7 @@ QBCore.Functions.CreateCallback("qb-vehiclewipe:server:isVehicleParked", functio
 end)
 
 function Wipe()
-    TriggerClientEvent("qb-vehiclewipe:client:wipe", -1)
+    TriggerClientEvent("mh-vehiclewipe:client:wipe", -1)
     SetTimeout(30 * (60 * 1000), Wipe)
 end
 -- dont remove this below, or the Auto wipe will not work.
