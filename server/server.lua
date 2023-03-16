@@ -27,7 +27,7 @@ end)
 
 function Wipe()
     TriggerClientEvent("mh-vehiclewipe:client:wipe", -1)
-    SetTimeout(30 * (60 * 1000), Wipe)
+    SetTimeout(Config.WipeTime * Config.WaitTimer, Wipe)
 end
 -- dont remove this below, or the Auto wipe will not work.
 Wipe()
