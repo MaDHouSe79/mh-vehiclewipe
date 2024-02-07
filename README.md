@@ -1,3 +1,34 @@
+<p align="center">
+    <img width="140" src="https://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/128/Letter-M-icon.png" />  
+    <h1 align="center">Hi 👋, I'm MaDHouSe</h1>
+    <h3 align="center">A passionate allround developer </h3>    
+</p>
+
+<p align="center">
+  <a href="https://github.com/MaDHouSe79/mh-vehiclewipe/issues">
+    <img src="https://img.shields.io/github/issues/MaDHouSe79/mh-vehiclewipe"/> 
+  </a>
+  <a href="https://github.com/MaDHouSe79/mh-vehiclewipe/watchers">
+    <img src="https://img.shields.io/github/watchers/MaDHouSe79/mh-vehiclewipe"/> 
+  </a> 
+  <a href="https://github.com/MaDHouSe79/mh-vehiclewipe/network/members">
+    <img src="https://img.shields.io/github/forks/MaDHouSe79/mh-vehiclewipe"/> 
+  </a>  
+  <a href="https://github.com/MaDHouSe79/mh-vehiclewipe/stargazers">
+    <img src="https://img.shields.io/github/stars/MaDHouSe79/mh-vehiclewipe?color=white"/> 
+  </a>
+  <a href="https://github.com/MaDHouSe79/mh-vehiclewipe/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/MaDHouSe79/mh-vehiclewipe?color=black"/> 
+  </a>      
+</p>
+
+<p align="center">
+  <img alig src="https://github-profile-trophy.vercel.app/?username=MaDHouSe79&margin-w=15&column=6" />
+</p>
+
+## 🙈 Youtube
+- [Youtube](https://www.youtube.com/@MaDHouSe79) for videos
+
 ## MH Automatic Vehicle Wipe Script by MaDHouSe
 - This script will automatically wipe your server every 30min
 - if you use qb-parking you can set `Config.UseParking` to `true`
@@ -13,6 +44,19 @@
 - Start your server.
 - is wil run automatically every 30min for now.
 
+## Triggers, to add and remove a plates
+```lua
+-- client side triggers
+TriggerServerEvent('mh-vehiclewipe:server:addplate', plate)
+TriggerServerEvent('mh-vehiclewipe:server:removeplate', plate)
+```
+
+```lua
+-- server side triggers
+TriggerEvent('mh-vehiclewipe:server:addplate', plate)
+TriggerEvent('mh-vehiclewipe:server:removeplate', plate)
+```
+
 ## Admin Command
 - typ `/wipeall` to start a server wipe.
 
@@ -22,6 +66,8 @@ Config.WaitTimer    = 60000 -- By default 1 minute
 Config.WipeTime     = 30    -- By default wipe every 30 minutes.
 Config.UseParking   = true  -- By default false, but if you are using qb-parking set this true
 Config.IgnorePlates = {     -- Vehicleshop vehicle plates to be ignored for wipe.
-    [0] = "BUY ME", 
+    "BUY-ME", 
+    "BUY ME", 
+    "TESTDRIVE",
 }
 ```
