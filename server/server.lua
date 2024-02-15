@@ -1,6 +1,9 @@
 --[[ ====================================================== ]]--
 --[[            MH Vehicle Wipe Script by MaDHouSe          ]]--
 --[[ ====================================================== ]]--
+--[[ ====================================================== ]]--
+--[[            MH Vehicle Wipe Script by MaDHouSe          ]]--
+--[[ ====================================================== ]]--
 local QBCore = exports['qb-core']:GetCoreObject()
 local ignoredPlates = {}
 
@@ -35,6 +38,24 @@ local function Wipe()
     SetTimeout(Config.WipeTime * (60 * 1000), Wipe)
 end
 
+QBCore.Commands.Add("wipeall", "Wipe vehicles", {}, false, function(source)
+    Wipe()
+end, "admin")
+
+-- if you use mh-parking you can use this to ignore parked vehicles.
+QBCore.Functions.CreateCallback("mh-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
+    if Config.UseParking then
+        local result = MySQL.scalar.await('SELECT * FROM player_parking WHERE plate = ?', {plate})
+        if result ~= nil then cb(true) else cb(false) end
+    else
+        cb(false) 
+    end
+end)
+
+QBCore.Functions.CreateCallback("mh-vehiclewipe:server:isVehicleIgnored", function(source, cb, plate)
+    if CheckPlate(plate) then cb(true) else cb(false) end
+end)
+
 AddEventHandler('onResourceStart', function(resourceName)
     if resourceName == GetCurrentResourceName() then
         ignoredPlates = {}
@@ -50,31 +71,8 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
 end)
 
-QBCore.Commands.Add("wipeall", "Wipe vehicles", {}, false, function(source)
+RegisterNetEvent("mh-vehiclewipe:server:onjoin", function(plate)
     Wipe()
-end, "admin")
-
--- if you use mh-parking you can use this to ignore parked vehicles.
-QBCore.Functions.CreateCallback("mh-vehiclewipe:server:isVehicleParked", function(source, cb, plate)
-    if Config.UseParking then
-        MySQL.Async.fetchAll("SELECT * FROM player_parking WHERE plate = ?", {plate}, function(rs)
-            if type(rs) == 'table' and #rs > 0 then
-                cb(true) 
-            else 
-                cb(false) 
-            end
-        end)
-    else
-        cb(false)
-    end
-end)
-
-QBCore.Functions.CreateCallback("mh-vehiclewipe:server:isVehicleIgnored", function(source, cb, plate)
-    if CheckPlate(plate) then
-        cb(true)
-    else
-        cb(false)
-    end
 end)
 
 RegisterNetEvent("mh-vehiclewipe:server:addplate", function(plate)
@@ -84,6 +82,3 @@ end)
 RegisterNetEvent("mh-vehiclewipe:server:removeplate", function(plate)
     RemovePlate(Trim(plate))
 end)
-
--- dont remove this below, or the Auto wipe will not work.
-Wipe()
