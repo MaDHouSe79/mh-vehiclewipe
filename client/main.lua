@@ -3,6 +3,12 @@
 --[[ ====================================================== ]]--
 local QBCore = exports['qb-core']:GetCoreObject()
 
+local function Delete(vehicle)
+    SetVehicleHasBeenOwnedByPlayer(vehicle, false) 
+    SetEntityAsMissionEntity(vehicle, true, true) 
+    if (DoesEntityExist(vehicle)) then DeleteVehicle(vehicle) end
+end
+
 RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     TriggerServerEvent('mh-vehiclewipe:server:onjoin')
 end)
@@ -12,12 +18,6 @@ AddEventHandler('onResourceStart', function(resource)
         TriggerServerEvent('mh-vehiclewipe:server:onjoin')
     end
 end)
-
-local function Delete(vehicle)
-    SetVehicleHasBeenOwnedByPlayer(vehicle, false) 
-    SetEntityAsMissionEntity(vehicle, true, true) 
-    if (DoesEntityExist(vehicle)) then DeleteVehicle(vehicle) end
-end
 
 RegisterNetEvent("mh-vehiclewipe:client:wipe", function()
     QBCore.Functions.Notify(Lang:t('info.wipe_message1'), "primary", Config.WaitTimer)
