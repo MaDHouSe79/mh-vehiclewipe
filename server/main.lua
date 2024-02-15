@@ -1,9 +1,6 @@
 --[[ ====================================================== ]]--
 --[[            MH Vehicle Wipe Script by MaDHouSe          ]]--
 --[[ ====================================================== ]]--
---[[ ====================================================== ]]--
---[[            MH Vehicle Wipe Script by MaDHouSe          ]]--
---[[ ====================================================== ]]--
 local QBCore = exports['qb-core']:GetCoreObject()
 local ignoredPlates = {}
 
@@ -71,7 +68,7 @@ AddEventHandler('onResourceStop', function(resourceName)
     end
 end)
 
-RegisterNetEvent("mh-vehiclewipe:server:onjoin", function(plate)
+RegisterNetEvent("mh-vehiclewipe:server:onjoin", function()
     Wipe()
 end)
 
