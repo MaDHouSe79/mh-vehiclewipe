@@ -23,7 +23,7 @@ RegisterNetEvent("mh-vehiclewipe:client:wipe", function()
     QBCore.Functions.Notify(Lang:t('info.wipe_message1'), "primary", Config.WaitTimer)
     QBCore.Functions.Notify(Lang:t('info.wipe_message2', {seconds = 1}), "primary", Config.WaitTimer)
     local count = 0
-    Citizen.Wait(Config.WaitTimer) --- Time before the cleanup is done 30 000 = 30 seconds`
+    Wait(Config.WaitTimer) --- Time before the cleanup is done 30 000 = 30 seconds`
     local vehicles = GetGamePool('CVehicle')
     for _, vehicle in pairs(vehicles) do
         if DoesEntityExist(vehicle) then
@@ -32,8 +32,10 @@ RegisterNetEvent("mh-vehiclewipe:client:wipe", function()
                 if parked then return end
                 QBCore.Functions.TriggerCallback("mh-vehiclewipe:server:isVehicleIgnored", function(ignore)
                     if ignore then return end
-                    Delete(vehicle)
-                    count = count + 1
+                    if GetPedInVehicleSeat(vehicle, -1) ~= PlayerPedId() then
+                        Delete(vehicle)
+                        count = count + 1
+                    end
                 end, plate)
             end, plate)
             Wait(10)
