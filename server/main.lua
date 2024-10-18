@@ -37,6 +37,7 @@ end
 
 QBCore.Commands.Add("wipeall", "Wipe vehicles", {}, false, function(source)
     TriggerClientEvent("mh-vehiclewipe:client:wipe", -1)
+    Wipe()
 end, "admin")
 
 -- if you use mh-parking you can use this to ignore parked vehicles.
