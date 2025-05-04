@@ -4,6 +4,6 @@
     <h3 align="center">A passionate allround developer </h3>    
 </p>
 
-# MH Vehicle Wipe
+# MH Vehicle Wipe (Automatic)
 - Download: https://github.com/MH-Scripts
 - Youtube: https://www.youtube.com/@MaDHouSe79
